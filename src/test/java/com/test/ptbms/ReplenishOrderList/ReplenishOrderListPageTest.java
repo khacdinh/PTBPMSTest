@@ -22,7 +22,7 @@ public class ReplenishOrderListPageTest extends BaseTest {
     private ReplenishOrderSearchAction searchOrder;
     private ReplenishOrderSearchVerify verifySearchOrder;
 
-  //  @Test
+    @Test
     public void add_new_replenish_order() {
         WebDriver driver = Driver.driver;
         rep = ReplenishOrderListPage.getCreateInstance(driver);
@@ -69,7 +69,7 @@ public class ReplenishOrderListPageTest extends BaseTest {
         rep = ReplenishOrderListPage.getSearchInstance(driver, searchOrder, verifySearchOrder);
         //
         rep.filter()
-                .byReplenishOrderNo("RP0000046811")
+                .byReplenishOrderNo("RP00000468")
                 .byRegisterUser("DAVID.CHEN")
                 .selectResponsibleDepartment(LiabilityAndResponsibleType.T01.getValue())
                 .bySAPMONo("0006006579A4")
@@ -79,8 +79,9 @@ public class ReplenishOrderListPageTest extends BaseTest {
                 .selectOrderStatusStart(OrderStatus.STATUS_40.getValue())
                 .selectOrderStatusEnd(OrderStatus.STATUS_40.getValue())
                 .clickBtnSearch();
-
         rep.verifySearch().byRegisterUser("DAVID.CHEN");
+
+
     }
 
 }

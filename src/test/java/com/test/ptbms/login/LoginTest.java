@@ -20,7 +20,7 @@ public class LoginTest {
     private LoginPageVerify verify;
     private LoginPage loginPage;
 
-    //@BeforeTest
+    @BeforeTest
     public void init() {
         Driver.Inittialize();
         WebDriver driver = Driver.driver;
@@ -29,19 +29,19 @@ public class LoginTest {
         loginPage = LoginPage.getInstance(driver, act, verify);
     }
 
-   // @Test(priority = 1)
+   @Test(priority = 1)
     public void user_wrong_password_login() throws Exception {
         loginPage.act().enterUserName("DINO.NGUYEN").enterPassword("ABC123").clickLogin();
         loginPage.verify().valueAsExpected(messageError, WRONG_USERNAME_PASSWORD_MESSAGE);
     }
 
-  //  @Test(priority = 2)
+   @Test(priority = 2)
     public void user_can_login() throws Exception {
         loginPage.act().enterUserName("DINO.NGUYEN").enterPassword("Lawson123").clickLogin();
         loginPage.verify().title(DASHBOARD_TITLE);
     }
 
-    //@AfterTest
+    @AfterTest
     public void clean() {
         Driver.driver.close();
     }
