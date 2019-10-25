@@ -29,8 +29,6 @@ public class Driver {
     private static ThreadLocal<DriverFactory> driverFactoryThread;
     public static void Inittialize() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 //        driverFactoryThread = ThreadLocal.withInitial(() -> {
 //            DriverFactory driverFactory = new DriverFactory();
 //            webDriverThreadPool.add(driverFactory);

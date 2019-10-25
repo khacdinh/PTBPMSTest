@@ -5,14 +5,17 @@ import com.btbms.pages.commons.HandlingSuggestionType;
 import com.btbms.pages.commons.LiabilityAndResponsibleType;
 import com.btbms.pages.commons.OrderStatus;
 import com.btbms.pages.commons.OrderType;
-import com.btbms.pages.login.LoginPage;
-import com.btbms.pages.login.LoginPageAction;
 import com.btbms.pages.navigation.OrderProcessMenu;
 import com.btbms.pages.navigation.OrderProcessType;
-import com.btbms.pages.orderprocess.replenish.*;
+import com.btbms.pages.orderprocess.replenish.ReplenishOrderListPage;
+import com.btbms.pages.orderprocess.replenish.ReplenishOrderSearchAction;
+import com.btbms.pages.orderprocess.replenish.ReplenishOrderSearchVerify;
 import com.test.ptbms.base.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
 public class ReplenishOrderListPageTest extends BaseTest {
@@ -22,7 +25,7 @@ public class ReplenishOrderListPageTest extends BaseTest {
     private ReplenishOrderSearchAction searchOrder;
     private ReplenishOrderSearchVerify verifySearchOrder;
 
-    @Test
+   // @Test
     public void add_new_replenish_order() {
         WebDriver driver = Driver.driver;
         rep = ReplenishOrderListPage.getCreateInstance(driver);
@@ -52,16 +55,12 @@ public class ReplenishOrderListPageTest extends BaseTest {
         //Verify Replenish Order No create
         String currentRepOrderNo = rep.createVerify().getReplenishOrderNo();
         rep.createVerify().replenishOrderNo(repOrderNoGenerate, currentRepOrderNo);
+        Driver.driver.findElement(By.xpath("//*[@id=\"navbar\"]/li[3]/a")).click();
     }
-
 
     @Test
     public void search_replenish_order() throws Exception {
         WebDriver driver = Driver.driver;
-        LoginPageAction loginPageAction = PageFactory.initElements(driver, LoginPageAction.class);
-        LoginPage loginPage = LoginPage.getInstance(driver, loginPageAction);
-        loginPage.act().enterUserName("DINO.NGUYEN").enterPassword("Lawson123").clickLogin();
-
         OrderProcessMenu.goTo(OrderProcessType.REPLENISH_ORDER);
         //WebDriver driver = DriverBase.getDriver();
         searchOrder = PageFactory.initElements(driver, ReplenishOrderSearchAction.class);
@@ -80,8 +79,7 @@ public class ReplenishOrderListPageTest extends BaseTest {
                 .selectOrderStatusEnd(OrderStatus.STATUS_40.getValue())
                 .clickBtnSearch();
         rep.verifySearch().byRegisterUser("DAVID.CHEN");
-
-
+        Driver.driver.quit();
     }
 
 }

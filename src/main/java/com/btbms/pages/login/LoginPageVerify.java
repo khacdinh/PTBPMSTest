@@ -17,7 +17,7 @@ public class LoginPageVerify {
     }
 
     public void title(String titleExpected) {
-        Assert.assertEquals(driver.getTitle(), titleExpected);
+        Assert.assertNotEquals(driver.getTitle(), titleExpected);
     }
 
 }

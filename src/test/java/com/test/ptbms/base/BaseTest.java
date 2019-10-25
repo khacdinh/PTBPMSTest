@@ -5,11 +5,10 @@ import com.btbms.listeners.ScreenshotListener;
 import com.btbms.pages.login.LoginPage;
 import com.btbms.pages.login.LoginPageAction;
 import com.btbms.pages.login.LoginPageVerify;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 
 @Listeners(ScreenshotListener.class)
@@ -22,6 +21,7 @@ public class BaseTest {
     public void init() {
         Driver.Inittialize();
         WebDriver driver = Driver.driver;
+        Driver.driver.manage().deleteAllCookies();
         act = PageFactory.initElements(driver, LoginPageAction.class);
         verify = PageFactory.initElements(driver, LoginPageVerify.class);
         loginPage = LoginPage.getInstance(driver, act, verify);
@@ -30,6 +30,6 @@ public class BaseTest {
 
     @AfterTest
     public void clean() {
-        Driver.driver.close();
+        Driver.driver.quit();
     }
 }

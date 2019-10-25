@@ -30,6 +30,7 @@ public class ReplenishOrderSearchAction {
 
     @FindBy(id = ReplenishOrderConstants.SEARCH_RPO_HEAD_ORDER_DATE_START_ID)
     private WebElement rpoHeadOrderDateStart;
+
     @FindBy(id = ReplenishOrderConstants.SEARCH_RPOHEAD_TO_ORDER_DATE_ID)
     private WebElement rpoHeadToOrderDateEnd;
 

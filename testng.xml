@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My Suite" verbose="2"  parallel="tests" thread-count="10">
+    <test name="Workflow Tests" parallel="none">
+        <classes>
+            <class name="com.test.ptbms.login.LoginTest"/>
+            <class name="com.test.ptbms.ReplenishOrderList.ReplenishOrderListPageTest"/>
+        </classes>
+    </test>
+</suite>
