@@ -1,37 +1,36 @@
 package com.btbms.pages.orderprocess.replenish;
 
 import com.btbms.config.Driver;
-import com.btbms.pages.enums.Action;
-import com.btbms.pages.orderprocess.replenish.create.ReplenishOrderCreateAction;
-import com.btbms.pages.orderprocess.replenish.create.ReplenishOrderCreateVerify;
+import com.btbms.pages.constants.ReplenishOrderConstants;
+import com.btbms.pages.orderprocess.replenish.CURDaction.ReplenishOrderCRUDAction;
+import com.btbms.pages.orderprocess.replenish.CURDaction.ReplenishOrderCRUDVerify;
 import com.btbms.pages.orderprocess.replenish.search.ReplenishOrderSearchAction;
-import com.btbms.pages.orderprocess.replenish.search.ReplenishOrderSearchVerify;
-import com.btbms.pages.orderprocess.replenish.table.ReplenishOrderListTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class ReplenishOrderListPage {
 
     //Create
-    private ReplenishOrderCreateAction act;
-    private ReplenishOrderCreateVerify createVerify;
+    private ReplenishOrderCRUDAction act;
+    private ReplenishOrderCRUDVerify verify;
 
     //Search
     private ReplenishOrderSearchAction searchOrder;
     private ReplenishOrderTableVerify verifyResult;
 
-    public static ReplenishOrderListPage getInstance(Action action) {
+    //View
+
+    public static ReplenishOrderListPage getInstance() {
         ReplenishOrderListPage replenishOrderListPage = PageFactory.initElements(Driver.driver, ReplenishOrderListPage.class);
         replenishOrderListPage.verifyResult = PageFactory.initElements(Driver.driver, ReplenishOrderTableVerify.class);
-        switch (action){
-            case CREATE:
-                replenishOrderListPage.act = PageFactory.initElements(Driver.driver, ReplenishOrderCreateAction.class);
-                replenishOrderListPage.createVerify = PageFactory.initElements(Driver.driver, ReplenishOrderCreateVerify.class);
-                break;
-            case SEARCH:
-                replenishOrderListPage.searchOrder = PageFactory.initElements(Driver.driver, ReplenishOrderSearchAction.class);
-                break;
-        }
+        replenishOrderListPage.act = PageFactory.initElements(Driver.driver, ReplenishOrderCRUDAction.class);
+        replenishOrderListPage.verify = PageFactory.initElements(Driver.driver, ReplenishOrderCRUDVerify.class);
+        replenishOrderListPage.searchOrder = PageFactory.initElements(Driver.driver, ReplenishOrderSearchAction.class);
+
         return replenishOrderListPage;
     }
 
@@ -39,7 +38,7 @@ public class ReplenishOrderListPage {
         return searchOrder;
     }
 
-    public ReplenishOrderTableVerify verifyResult(){
+    public ReplenishOrderTableVerify verifyResult() {
 
         return verifyResult;
     }
@@ -49,18 +48,47 @@ public class ReplenishOrderListPage {
         return Driver.driver.findElement(By.id("rpohead_rporderno")).getText();
 
     }
-    public void clickBtnNew() {
+
+    public void clickNewBtn() {
         Driver.driver.findElement(newButtonName()).click();
     }
 
     private static By newButtonName() {
         return By.xpath("//*[@id=\"searchRpohead\"]/div[2]/table/tbody/tr/td/input[2]");
     }
+    public static void clickViewBtn() {
+        clickButton(ReplenishOrderConstants.VIEW_REPLENISH_ORDER_LIST_XPATH);
+    }
 
-    public ReplenishOrderCreateAction action() {
+
+    public static void clickEditBtn() {
+        clickButton(ReplenishOrderConstants.EDIT_REPLENISH_ORDER_LIST_XPATH);
+    }
+
+    public static void clickDeleteBtn() {
+        clickButton(ReplenishOrderConstants.DELETE_REPLENISH_ORDER_LIST_XPATH);
+    }
+
+    private static void clickButton(By buttonType) {
+        WebElement tables = Driver.driver.findElement(ReplenishOrderConstants.REPLENISH_ORDER_LIST_TABLE_XPATH);
+        List<WebElement> rowsTables = tables.findElements(By.tagName("tr"));
+        for (WebElement rowsTable : rowsTables) {
+            List<WebElement> links = rowsTable.findElements(By.id("navbar"));
+            for (WebElement link : links) {
+                Actions action = new Actions(Driver.driver);
+                action.moveToElement(link);
+                action.perform();
+                rowsTable.findElement(buttonType).click();
+                return;
+            }
+        }
+    }
+
+    public ReplenishOrderCRUDAction action() {
         return act;
     }
-    public ReplenishOrderCreateVerify createVerify() {
-        return createVerify;
+
+    public ReplenishOrderCRUDVerify verify() {
+        return verify;
     }
 }

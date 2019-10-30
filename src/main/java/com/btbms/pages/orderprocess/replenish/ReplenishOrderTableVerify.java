@@ -1,17 +1,17 @@
 package com.btbms.pages.orderprocess.replenish;
 
-import com.btbms.config.Driver;
 import com.btbms.pages.model.ReplenishOrder;
+import com.btbms.pages.orderprocess.replenish.CURDaction.ReplenishOrderForm;
 import com.btbms.pages.orderprocess.replenish.table.ReplenishOrderListTable;
 import org.apache.commons.collections.CollectionUtils;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ReplenishOrderTableVerify {
+public class ReplenishOrderTableVerify extends ReplenishOrderForm {
 
     List<ReplenishOrder> replenishOrders=new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class ReplenishOrderTableVerify {
         return this;
     }
 
-    public ReplenishOrderTableVerify byRegisterUser(int resultNumber, String value) {
+    public ReplenishOrderTableVerify registerUser(int resultNumber, String value) {
         if (CollectionUtils.isEmpty(replenishOrders)) {
             throw new NoSuchElementException("No data in table ReplenishOrder");
         }
@@ -40,11 +40,13 @@ public class ReplenishOrderTableVerify {
         return this;
     }
 
-    public ReplenishOrderTableVerify byOrderStatus(int resultNumber, String orderStatus) {
+    public ReplenishOrderTableVerify orderStatus(int resultNumber, String orderStatus) {
         if (CollectionUtils.isEmpty(replenishOrders)) {
             throw new NoSuchElementException("No data in table ReplenishOrder");
         }
         Assertions.assertThat(orderStatus).isEqualTo(replenishOrders.get(resultNumber - 1).getOrderStatus().getValue());
         return this;
     }
+
+
 }
