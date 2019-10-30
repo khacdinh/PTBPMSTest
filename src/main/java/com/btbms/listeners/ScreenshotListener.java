@@ -1,6 +1,7 @@
 package com.btbms.listeners;
 
 import com.btbms.config.Driver;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 
 public class ScreenshotListener extends TestListenerAdapter {
+    private static final Logger LOGGER = Logger.getLogger(ScreenshotListener.class);
 
     private boolean createFile(File screenshot) {
         boolean fileCreated = false;

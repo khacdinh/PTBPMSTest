@@ -66,6 +66,11 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.7.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -85,9 +90,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.14.1</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+<!--                    <suiteXmlFiles>-->
+<!--                        <suiteXmlFile>testng.xml</suiteXmlFile>-->
+<!--                    </suiteXmlFiles>-->
                 </configuration>
             </plugin>
         </plugins>
@@ -109,71 +114,6 @@
                             <target>${java.version}</target>
                         </configuration>
                         <version>${maven-compiler-plugin.version}</version>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.lazerycode.selenium</groupId>
-                        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-                        <version>${driver-binary-downloader-maven-plugin.version}</version>
-                        <configuration>
-                            <rootStandaloneServerDirectory>${project.basedir}/src/test/resources/selenium_standalone_binaries</rootStandaloneServerDirectory>
-                            <downloadedZipFileDirectory>${project.basedir}/src/test/resources/selenium_standalone_zips</downloadedZipFileDirectory>
-                            <customRepositoryMap>${project.basedir}/src/test/resources/RepositoryMap.xml</customRepositoryMap>
-                            <overwriteFilesThatExist>${overwrite.binaries}</overwriteFilesThatExist>
-                            <onlyGetDriversForHostOperatingSystem>false</onlyGetDriversForHostOperatingSystem>
-                            <fileDownloadRetryAttempts>${retry.attempts}</fileDownloadRetryAttempts>
-                            <fileDownloadReadTimeout>${read.timeout}</fileDownloadReadTimeout>
-                            <operatingSystems>
-                                <windows>true</windows>
-                                <linux>true</linux>
-                                <mac>true</mac>
-                            </operatingSystems>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>selenium</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven-failsafe-plugin.version}</version>
-                        <configuration>
-                            <parallel>methods</parallel>
-                            <threadCount>${threads}</threadCount>
-                            <systemPropertyVariables>
-                                <browser>${browser}</browser>
-                                <screenshotDirectory>${project.build.directory}/screenshots</screenshotDirectory>
-                                <remoteDriver>${remote}</remoteDriver>
-                                <gridURL>${seleniumGridURL}</gridURL>
-                                <desiredPlatform>${platform}</desiredPlatform>
-                                <desiredBrowserVersion>${browserVersion}</desiredBrowserVersion>
-                                <proxyEnabled>${proxyEnabled}</proxyEnabled>
-                                <proxyHost>${proxyHost}</proxyHost>
-                                <proxyPort>${proxyPort}</proxyPort>
-                                <proxyUsername>${proxyUsername}</proxyUsername>
-                                <proxyPassword>${proxyPassword}</proxyPassword>
-                                <headless>${headless}</headless>
-
-                                <!--Set properties passed in by the driver binary downloader-->
-                                <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
-                                <webdriver.ie.driver>${webdriver.ie.driver}</webdriver.ie.driver>
-                                <webdriver.opera.driver>${webdriver.opera.driver}</webdriver.opera.driver>
-                                <webdriver.gecko.driver>${webdriver.gecko.driver}</webdriver.gecko.driver>
-                                <webdriver.edge.driver>${webdriver.edge.driver}</webdriver.edge.driver>
-                            </systemPropertyVariables>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <!--This goal makes the build fail if you have test failures-->
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
