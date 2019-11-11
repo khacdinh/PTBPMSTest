@@ -10,15 +10,18 @@ public class LoginPageAction {
     public LoginPageAction(WebDriver driver) {
         this.driver = driver;
     }
-    public LoginPageAction enterUserName(String userName)  {
+
+    public LoginPageAction enterUserName(String userName) {
         this.driver.findElement(By.id("idUser")).sendKeys(userName);
         return this;
     }
+
     public LoginPageAction enterPassword(String password) {
         this.driver.findElement(By.id("idPass")).sendKeys(password);
         return this;
     }
-    public void clickLogin(){
+
+    public void clickLogin() {
         this.driver.findElement(By.id("btnSubmit")).click();
     }
 

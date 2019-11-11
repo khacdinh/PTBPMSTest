@@ -1,31 +1,32 @@
 package com.btbms.pages.login;
 
-import com.btbms.config.Driver;
-import com.btbms.config.PTBProperties;
+
+import net.serenitybdd.core.pages.PageObject;
+import net.thucydides.core.annotations.Managed;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends PageObject {
     private LoginPageAction act;
     private LoginPageVerify verify;
+
+    @Managed
+    WebDriver driver;
 
     public LoginPageAction act() {
         return act;
     }
+
     public LoginPageVerify verify() {
         return verify;
     }
 
-
-    public static LoginPage getInstance() {
-        LoginPage loginPage = PageFactory.initElements(Driver.driver, LoginPage.class);
-        loginPage.act = PageFactory.initElements(Driver.driver, LoginPageAction.class);;
-        loginPage.verify =  PageFactory.initElements(Driver.driver, LoginPageVerify.class);
-        PTBProperties properties = PTBProperties.getInstance();
-        String url = properties.getProperty("application.url.test");
-        Driver.driver.get(url);
-        return loginPage;
+    public LoginPage(WebDriver driver) {
+        super(driver);
+        open();
+        this.act = PageFactory.initElements(driver, LoginPageAction.class);
+        this.verify = PageFactory.initElements(driver, LoginPageVerify.class);
 
     }
-
 
 }

@@ -1,38 +1,32 @@
 package com.test.ptbms.login;
 
-import com.btbms.config.Driver;
-import com.btbms.listeners.ScreenshotListener;
-import com.btbms.pages.login.LoginPage;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.btbms.pages.login.LoginStep;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Steps;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
+@RunWith(SerenityRunner.class)
 public class LoginTest {
-    private static final String LOGIN_TITLE = "PTBPMS | Login";
-    private static final String WRONG_USERNAME_PASSWORD_MESSAGE = "Your login attempt was not successful, try again.\n" +
-            "Caused : Incorrect Password! (USRLOGIN00001)";
-    private By messageError = By.className("alert-danger");
-    private LoginPage loginPage;
+    @Managed
+    WebDriver driver;
 
-    @BeforeMethod
-    public void init() {
-        Driver.setUp();
-        loginPage = LoginPage.getInstance();
+    @Steps
+    LoginStep loginStep;
+
+    @Test
+    public void  userLoginOK() {
+        loginStep.enter_username_and_password("DINO.NGUYEN","Lawson123");
+        loginStep.click_login();
+        loginStep.should_not_in_login_page();
     }
 
-    @Test(priority = 1)
-    public void user_wrong_password_login() throws Exception {
-        loginPage.act().enterUserName("DINO.NGUYEN").enterPassword("ABC123").clickLogin();
-        loginPage.verify().valueAsExpected(messageError, WRONG_USERNAME_PASSWORD_MESSAGE);
-        Driver.driver.quit();
+    @Test
+    public void  userLoginNOK() {
+        loginStep.enter_username_and_password("DINO.NGUYEN","Lawson2123");
+        loginStep.click_login();
+        loginStep.should_not_login_page();
     }
-
-    @Test(priority = 2)
-    public void user_can_login() throws Exception {
-        loginPage.act().enterUserName("DINO.NGUYEN").enterPassword("Lawson123").clickLogin();
-        loginPage.verify().title(LOGIN_TITLE);
-        Driver.driver.quit();
-    }
-
 }

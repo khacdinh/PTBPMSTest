@@ -1,17 +1,12 @@
 package com.btbms.pages.orderprocess.replenish.search;
 
 import com.btbms.pages.constants.ReplenishOrderConstants;
-import org.openqa.selenium.WebDriver;
+import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ReplenishOrderSearchAction {
 
-    private WebDriver driver;
-
-    public ReplenishOrderSearchAction(WebDriver driver) {
-        this.driver = driver;
-    }
+public class ReplenishOrderSearchAction extends PageObject {
 
     @FindBy(id = ReplenishOrderConstants.RPORDERNO_ID)
     private WebElement rpOrderNo;
@@ -43,31 +38,37 @@ public class ReplenishOrderSearchAction {
     @FindBy(id = "btnSearch")
     private WebElement btnSearch;
 
+
     public ReplenishOrderSearchAction byReplenishOrderNo(String value) {
         rpOrderNo.clear();
         rpOrderNo.sendKeys(value);
         return this;
     }
 
+
     public ReplenishOrderSearchAction byRegisterUser(String value) {
         registerUser.sendKeys(value);
         return this;
     }
+
 
     public ReplenishOrderSearchAction selectResponsibleDepartment(String value) {
         responsibleDept.sendKeys(value);
         return this;
     }
 
+
     public ReplenishOrderSearchAction bySAPMONo(String value) {
         sapMoNo.sendKeys(value);
         return this;
     }
 
+
     public ReplenishOrderSearchAction byCustomerNo(String value) {
         customerNo.sendKeys(value);
         return this;
     }
+
 
     public ReplenishOrderSearchAction byOrderCreationDateFrom(String value) {
         rpoHeadOrderDateStart.sendKeys(value);
