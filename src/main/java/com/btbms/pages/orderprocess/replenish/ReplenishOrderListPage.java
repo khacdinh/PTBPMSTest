@@ -58,7 +58,7 @@ public class ReplenishOrderListPage extends PageObject {
     }
 
     public String getReplenishOrderNo() {
-        return this.driver.findElement(By.id("rpohead_rporderno")).getText();
+        return this.driver.findElement(By.id("rpohead_rporderno")).getAttribute("value").trim();
 
     }
 

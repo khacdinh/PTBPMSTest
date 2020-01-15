@@ -25,7 +25,7 @@ public class ReplenishOrderCRUDVerify extends ReplenishOrderForm {
     }
 
     public String getReplenishOrderNo() {
-        return this.driver.findElement(By.id(ReplenishOrderConstants.RPORDERNO_ID)).getText();
+        return this.driver.findElement(By.id(ReplenishOrderConstants.RPORDERNO_ID)).getAttribute("value").trim();
     }
 
     public void replenishOrderNoCreate(String expected, String result) {

@@ -37,7 +37,7 @@ public class ReplenishOrderTableVerify extends ReplenishOrderForm {
 
     public ReplenishOrderTableVerify getTableData() {
         this.replenishOrders.clear();
-        this.replenishOrders.addAll(replenishOrderListTable.getReplenishOrders2());
+        this.replenishOrders.addAll(replenishOrderListTable.getReplenishOrders());
         return this;
     }
 

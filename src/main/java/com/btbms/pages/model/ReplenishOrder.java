@@ -244,6 +244,38 @@ public class ReplenishOrder {
     }
 
 
+    @Override
+    public String toString() {
+        return "ReplenishOrder{" +
+                "replenishOrderNo='" + replenishOrderNo + '\'' +
+                ", orderType=" + orderType +
+                ", businessGroup='" + businessGroup + '\'' +
+                ", clothType='" + clothType + '\'' +
+                ", clothSpecification='" + clothSpecification + '\'' +
+                ", finishProductSpecification='" + finishProductSpecification + '\'' +
+                ", stitchPerInch='" + stitchPerInch + '\'' +
+                ", lotNo='" + lotNo + '\'' +
+                ", colorCodeInChinese='" + colorCodeInChinese + '\'' +
+                ", SAPCPONo='" + SAPCPONo + '\'' +
+                ", SAPMONo='" + SAPMONo + '\'' +
+                ", itemNoOfMaterial='" + itemNoOfMaterial + '\'' +
+                ", materialDescription='" + materialDescription + '\'' +
+                ", unitOfMeasure='" + unitOfMeasure + '\'' +
+                ", finishProductQuantity='" + finishProductQuantity + '\'' +
+                ", WIPLocation='" + WIPLocation + '\'' +
+                ", handlingSuggestionType=" + handlingSuggestionType +
+                ", orderStatus=" + orderStatus +
+                ", registerUser='" + registerUser + '\'' +
+                ", orderCreationDate='" + orderCreationDate + '\'' +
+                ", sAPSalesOrderNo='" + sAPSalesOrderNo + '\'' +
+                ", customerNo='" + customerNo + '\'' +
+                ", responseDept1=" + responseDept1 +
+                ", responseDept2=" + responseDept2 +
+                ", orderReason='" + orderReason + '\'' +
+                ", orderProcess='" + orderProcess + '\'' +
+                '}';
+    }
+
     public static final class ReplenishOrderBuilder {
         private String replenishOrderNo;
         private OrderType orderType;

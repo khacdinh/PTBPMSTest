@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ReplenishOrderListTable {
@@ -23,12 +22,7 @@ public class ReplenishOrderListTable {
         this.driver = driver;
     }
 
-    public static List<ReplenishOrder> getReplenishOrders() {
-
-        return Collections.EMPTY_LIST;
-    }
-
-    public List<ReplenishOrder> getReplenishOrders2() {
+    public List<ReplenishOrder> getReplenishOrders() {
         replenishOrders.clear();
         WebElement tables = this.driver.findElement(ReplenishOrderConstants.REPLENISH_ORDER_LIST_TABLE_XPATH);
 

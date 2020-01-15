@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 @Ignore
 public class BaseTest {
     @Managed
-    WebDriver driver;
+    public WebDriver driver;
 
     @Steps
     LoginStep loginStep;
